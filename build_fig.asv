@@ -1,0 +1,9 @@
+function build_fig(block_type,has_target,target,non_target, x_vec,y_vec ,target_color)
+    num_of_shapes = block_type{2};
+    shapes(1:num_of_shapes/2) = target;
+    
+    if block_type{1} == "conj"
+        conj_fig(has_target,target,non_target, x_vec,y_vec ,target_color)
+    else
+        feat_fig(has_target,target_shape, x_vec,y_vec ,target_color)
+end
