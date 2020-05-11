@@ -14,5 +14,7 @@ block_types = {{"conj",4},{"conj",8},{"conj",12},{"conj",16},{"feat",4},{"feat",
 trial_num = 30;
 block_num = length(block_types);
 stimuli_shape = ["X", "O"];
-color_vec = ["blue","red"];
-[x_vec,y_vec,Target_color,none_target_color] = fig_parameters(block_types{1},color_vec);
+color_vec = ["b","r"];
+
+[x_vec,y_vec,target_color,none_target_color] = fig_parameters(block_types{1},color_vec);
+build_fig(block_types{1},'true',"X", "O","blue","red", x_vec,y_vec)
