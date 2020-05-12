@@ -1,5 +1,4 @@
 clc; clear;
-
 %% figure def
 H = figure('units','normalized','position' ,[0 0 1 1]);
 set(H,'Name','Visual Search Experiment');
