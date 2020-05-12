@@ -18,3 +18,4 @@ color_vec = ["b","r"];
 
 [x_vec,y_vec,target_color,none_target_color] = fig_parameters(block_types{8},color_vec);
 build_fig(block_types{8},'true',"X", "O","blue","red", x_vec,y_vec)
+
