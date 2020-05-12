@@ -8,5 +8,5 @@ else
    Target_shape = stimuli_shape(2);
    none_target_shape = stimuli_shape(1);
 end
-has_target = randperm(30);
+has_target = mod(randperm(30),2)==0;
 
