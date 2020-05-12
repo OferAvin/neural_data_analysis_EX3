@@ -3,9 +3,9 @@ function conj_fig(shapes_num,has_target,target,non_target,target_color,non_targe
         shapes(1:shapes_num/2) = target;
         shapes(shapes_num/2+1:end) = non_target;
         if has_target == "true"
-           target_shape_txt = text(x_vec(2:shapes_num/2),y_vec(2:shapes_num/2),...
+            target_shape_txt = text(x_vec(2:shapes_num/2),y_vec(2:shapes_num/2),...
             shapes(2:shapes_num/2),'Color',non_target_color);
-           target_txt = text(x_vec(1),y_vec(1),shapes(1),'Color',target_color);
+            target_txt = text(x_vec(1),y_vec(1),shapes(1),'Color',target_color);
         else
             non_target_text = text(x_vec(1:shapes_num/2),y_vec(1:shapes_num/2),...
             shapes(1:shapes_num/2),'Color',non_target_color);
