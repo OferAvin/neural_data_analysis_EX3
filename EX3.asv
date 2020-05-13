@@ -35,7 +35,7 @@ end
 for i = 1:num_of_blocks
     cur_block_name = (char("B"+i));
     Cur_block = Expirament.(cur_block_name);
-    [Cur_block,has_passed] = is_valid_block(Cur_block,min_correct_ans_per_block,...
+    has_passed = is_valid_block(Cur_block,min_correct_ans_per_block,...
         max_time_in_sec,min_time_in_sec);
     if has_passed == 0
         error('not enough data');
