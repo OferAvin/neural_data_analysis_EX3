@@ -43,13 +43,14 @@ end
 
 %% Analisys
 
-cur_block_name = (char("B"+i));
-target_trails = get_sub_vec_intersect(Expirament.(cur_block_name).pass, 1,...
-    Expirament.(cur_block_name).has_target, 1);
-no_target_trails = get_sub_vec_intersect(Expirament.(cur_block_name).pass, 1,...
-    Expirament.(cur_block_name).has_target, 0);
 
+for i = 1:num_of_blocks
+    cur_block_name = (char("B"+i));
+    target_trails = get_sub_vec_intersect(Expirament.(cur_block_name).passed, 1,...
+        Expirament.(cur_block_name).has_target, 1);
+    no_target_trails = get_sub_vec_intersect(Expirament.(cur_block_name).passed, 1,...
+        Expirament.(cur_block_name).has_target, 0);
+    
+end
  close all force;
-
- 
 
