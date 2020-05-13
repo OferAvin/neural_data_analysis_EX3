@@ -30,6 +30,6 @@ for i = block_order
     Expirament.(cur_block).acc = acc;
     Expirament.(cur_block).rt = rt;
 end
-clf;
+close;
 
 
