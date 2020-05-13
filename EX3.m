@@ -27,7 +27,7 @@ block_order = randperm(num_of_blocks);
 
 for i = block_order   
     cur_block_name = (char("B"+i));
-    Expirament.(cur_block_name) = run_block(Expirament.(cur_block_name),stimuli_shape,color_vec,num_of_trails);
+    [Expirament.(cur_block_name),Expirament.(cur_block_name).has_target] = run_block(Expirament.(cur_block_name),stimuli_shape,color_vec,num_of_trails);
 end
 
 %% pre processing
