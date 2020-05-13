@@ -27,7 +27,7 @@ block_order = randperm(num_of_blocks);
 
 for i = block_order   
     cur_block_name = (char("B"+i));
-    [Expirament.(cur_block_name), = run_block(Expirament.(cur_block_name),stimuli_shape,color_vec,num_of_trails);
+    [Expirament.(cur_block_name),Expirament.(cur_block_name).has_target] = run_block(Expirament.(cur_block_name),stimuli_shape,color_vec,num_of_trails);
 end
 
 %% pre processing
@@ -40,6 +40,12 @@ for i = 1:num_of_blocks
         error('not enough data');
     end
 end
+
+cur_block_name = (char("B"+i));
+target_trails = get_sub_vec_intersect(Expirament.(cur_block_name).pass, 1,...
+    Expirament.(cur_block_name).has_target, 1);
+no_target_trails = get_sub_vec_intersect(Expirament.(cur_block_name).pass, 1,...
+    Expirament.(cur_block_name).has_target, 0);
 
  close all force;
 
