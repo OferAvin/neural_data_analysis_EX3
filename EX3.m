@@ -31,4 +31,5 @@ for i = block_order
     Expirament.(cur_block).rt = rt;
 end
 clf;
+filter_results(0.5);
 
