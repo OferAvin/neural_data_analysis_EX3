@@ -36,9 +36,9 @@ for i = 1:num_of_blocks
     cur_block_name = (char("B"+i));
     [Expirament.(cur_block_name),has_passed] = is_valid_block(Expirament.(cur_block_name),min_correct_ans_per_block,...
         max_time_in_sec,min_time_in_sec);
-    if has_passed == 0
-        error('not enough data');
-    end
+    %if has_passed == 0
+        %error('not enough data');
+    %end
 end
 
 %% Analisys
@@ -51,4 +51,5 @@ no_target_trails = get_sub_vec_intersect(Expirament.(cur_block_name).pass, 1,...
 
  close all force;
 
+ 
 
