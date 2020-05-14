@@ -5,17 +5,9 @@ set(H,'Name','Visual Search Experiment');
 set(H,'MenuBar','none');
 set(H,'ToolBar','none');
 set(H,'Color','w');
-fontsize = 20;
+fontsize = 14;
 axis off
-inst = text(0.5,0.5,...
-    {'Thank you for participating in the experiment.'  ' '  'In the following screens you will be presented with several shapes - X / O.'...
-    'The shapes can be in differenet colors - red / blue.' 'The target will be determined at the start of each block.'...
-    ' ' 'You are asked to response whether the target is displayed or not by pressing A for target present, and L for target absent on keyboard.'...
-    'Make sure your keyboard language is set on english' ' ' 'Try to be as quick as possible while making sure to be right.' ...
-    ' ' ' ' 'Press Spacebar to start the experiment.'}...
-    ,'HorizontalAlignment' , 'center','FontSize',14);
-space_to_continue;
-clf;
+expirament_instractions(fontsize);
 %% experiment parameters
 num_of_blocks = 8;
 num_of_trails = 30;
@@ -35,7 +27,7 @@ block_order = randperm(num_of_blocks);
 %% collect data
 for i = block_order   
     cur_block_name = (char("B"+i));
-    Expirament.(cur_block_name) = run_block(Expirament.(cur_block_name),stimuli_shape,color_vec,num_of_trails);
+    Expirament.(cur_block_name) = run_block(Expirament.(cur_block_name),stimuli_shape,color_vec,num_of_trails,fontsize);
 end
 
 %% pre processing
@@ -62,16 +54,19 @@ for i = 1:num_of_blocks
     Cur_block = calc_mean_sd_per_cond(Cur_block,no_target_trails);
     
     Expirament.(cur_block_name) = Cur_block;
-    [r_with_target,p_with_target] = calculat_pval_cor(set_sizes,Cur_block.results('mean','has_target'));
-    [r_no_target,p_no_target] = calculat_pval_cor(set_sizes,Cur_block.results('mean','no_target'));
-    Expirament.All_results.rho(Cur_block.condition,'has_target') = r_with_target;
-    Expirament.All_results.rho(Cur_block.condition,'no_target') = r_no_target;
-    Expirament.All_results.p_val(Cur_block.condition,'has_target') = p_with_target;
-    Expirament.All_results.p_val(Cur_block.condition,'no_target') = p_no_target;
 end
 
-%collecting data for the plots
+%collecting data for easer calculations
 [mean_target_F,mean_no_target_F,SD_target_F,SD_no_target_F] = collecting_data_by_search_type(Expirament,num_of_blocks,'feat');
 [mean_target_C,mean_no_target_C,SD_target_C,SD_no_target_C] = collecting_data_by_search_type(Expirament,num_of_blocks,'conj');   
+
+%calculating correlation and p-value
+ [r_feat_target,p_feat_target] = calculat_pval_cor(set_sizes,Cur_block.results(mean_target_F,'has_target'));
+ [r_feat_no_target,p_feat_no_target] = calculat_pval_cor(set_sizes,Cur_block.results('mean','no_target'));
+ 
+ Expirament.All_results.rho(Cur_block.condition,'has_target') = r_feat_target;
+ Expirament.All_results.rho(Cur_block.condition,'no_target') = r__feat_target;
+ Expirament.All_results.p_val(Cur_block.condition,'has_target') = p_feat_no_target;
+ Expirament.All_results.p_val(Cur_block.condition,'no_target') = p_feat_no_target;
  close all force;
 

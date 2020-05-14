@@ -1,17 +1,16 @@
 %this function displays instracion if current trail is the first
-function instaction_for_first_trail(target)
-if target == 'X'
-    message = sprintf(['Target stimulus is an X that is different from the'...
-    ' rest\nPress "a" if target is present\nPress "l" if target is not present\nPress spacebar to start.']);
-    text(0.5,0.5,message,'FontSize',14,'Units','normalized','horizontalAlignment','center')
+function instaction_for_first_trail(target,cond,fontsize)
+    if cond == 'feat'
+        message = sprintf(['Target stimulus is an %s \nPress "a" if target is present'...
+            '\nPress "l" if target is not present\nPress spacebar to start.'],target);
+    else
+        message = sprintf(['Target stimulus is a unique %s which is different from the rest'...
+            '\nPress "a" if target is present\nPress "l" if target is not present\nPress spacebar to start.'],target);
+    end
+    text(0.5,0.5,message,'FontSize',fontsize,'Units','normalized','horizontalAlignment','center')
     space_to_continue;
-else
-    message = sprintf(['Target stimulus is an O that is different from the'...
-    ' rest\nPress "a" if target is present\nPress "l" if target is not present\nPress spacebar to start.']);
-    text(0.5,0.5,message,'FontSize',14,'Units','normalized','horizontalAlignment','center')
-    space_to_continue;
+    clf;
+    axis off
 end
-clf;
-axis off
         
  

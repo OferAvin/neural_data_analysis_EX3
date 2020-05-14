@@ -1,4 +1,4 @@
-function [data_as_table] = build_table(dim1,dim2,var_name1,var_name2,row_name1,row_name2)
-    data_as_table = zeros(dim1,dim2);
-    data_as_table = array2table(data_as_table,'VariableNames',{var_name1,var_name2},...
-        'RowNames',{row_name1,row_name2});
+%this function creates a table with the specified row and colums names
+function [data_as_table] = build_table(row_names,col_names)
+    data_as_table = zeros(length(row_names),length(col_names));
+    data_as_table = array2table(data_as_table,'VariableNames',col_names,'RowNames',row_names);
