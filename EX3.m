@@ -1,14 +1,20 @@
 clc; clear;
 %% figure def
 H = figure('units','normalized','position' ,[0 0 1 1]);
-%space_to_continue;
 set(H,'Name','Visual Search Experiment');
 set(H,'MenuBar','none');
 set(H,'ToolBar','none');
 set(H,'Color','w');
 fontsize = 20;
 axis off
-
+inst = text(0.5,0.5,...
+    {'Thank you for participating in the experiment.'  ' '  'In the following screens you will be presented with several shapes - X / O.'...
+    'The shapes can be in differenet colors - red / blue.' 'The target will be determined at the start of each block.'...
+    ' ' 'You are asked to response whether the target is displayed or not by pressing A for target present, and L for target absent on keyboard.'...
+    'Make sure your keyboard language is set on english' ' ' 'Try to be as quick as possible while making sure to be right.' ...
+    ' ' ' ' 'Press Spacebar to start the experiment.'}...
+    ,'HorizontalAlignment' , 'center','FontSize',14);
+space_to_continue;
 %% experiment parameters
 num_of_blocks = 8;
 num_of_trails = 30;
@@ -57,5 +63,7 @@ for i = 1:num_of_blocks
     Cur_block.results('SD','no_target') = {std(Cur_block.rt( no_target_trails))};
     Expirament.(cur_block_name) = Cur_block; 
 end
+
+    
  close all force;
 
