@@ -1,3 +1,3 @@
-function a = rand_elements_eq(num, elements)
-    a = mod(randperm(num),length(elements));
+function a = rand_num_of_elements_eq(length, num_of_elements)
+    a = mod(randperm(length),num_of_elements);
 end

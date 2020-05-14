@@ -1,3 +1,4 @@
+%this function displays instracion if current trail is the first
 function instaction_for_first_trail(target)
 if target == 'X'
     message = sprintf(['Target stimulus is an X that is different from the'...
