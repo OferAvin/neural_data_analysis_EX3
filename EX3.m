@@ -60,9 +60,17 @@ for i = 1:num_of_blocks
     Cur_block = calc_mean_sd_per_cond(Cur_block,target_trails);
     Cur_block = calc_mean_sd_per_cond(Cur_block,no_target_trails);
     
-    Expirament.(cur_block_name) = Cur_block; 
+    Expirament.(cur_block_name) = Cur_block;
+    [r_with_target,p_with_target] = calculat_pval_cor(set_sizes,Cur_block.results('mean','has_target'));
+    [r_no_target,p_no_target] = calculat_pval_cor(set_sizes,Cur_block.results('mean','no_target'));
+    Expirament.All_results.rho(Cur_block.condition,'has_target') = r_with_target;
+    Expirament.All_results.rho(Cur_block.condition,'no_target') = r_no_target;
+    Expirament.All_results.p_val(Cur_block.condition,'has_target') = p_with_target;
+    Expirament.All_results.p_val(Cur_block.condition,'no_target') = p_no_target;
 end
 
-    
+%collecting data for the plots
+[mean_target_F,mean_no_target_F,SD_target_F,SD_no_target_F] = collecting_data_by_search_type(Expirament,num_of_blocks,'feat');
+[mean_target_C,mean_no_target_C,SD_target_C,SD_no_target_C] = collecting_data_by_search_type(Expirament,num_of_blocks,'conj');   
  close all force;
 

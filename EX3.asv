@@ -1,7 +1,6 @@
 clc; clear;
 %% figure def
 H = figure('units','normalized','position' ,[0 0 1 1]);
-%space_to_continue;
 set(H,'Name','Visual Search Experiment');
 set(H,'MenuBar','none');
 set(H,'ToolBar','none');
@@ -11,11 +10,11 @@ axis off
 inst = text(0.5,0.5,...
     {'Thank you for participating in the experiment.'  ' '  'In the following screens you will be presented with several shapes - X / O.'...
     'The shapes can be in differenet colors - red / blue.' 'The target will be determined at the start of each block.'...
-    ' ' 'You are asked to response whether the target is displayed or not by pressing A for target on, and L for target off on keyboard.'...
+    ' ' 'You are asked to response whether the target is displayed or not by pressing A for target present, and L for target absent on keyboard.'...
     'Make sure your keyboard language is set on english' ' ' 'Try to be as quick as possible while making sure to be right.' ...
     ' ' ' ' 'Press Spacebar to start the experiment.'}...
     ,'HorizontalAlignment' , 'center','FontSize',14);
-
+space_to_continue;
 %% experiment parameters
 num_of_blocks = 8;
 num_of_trails = 30;
@@ -55,19 +54,22 @@ for i = 1:num_of_blocks
     cur_block_name = (char("B"+i));
     Cur_block = Expirament.(cur_block_name);
     
-    target_trails = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.has_target, 1);
+    target_trails = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.has_target, 1);     
     no_target_trails = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.has_target, 0);
     
-<<<<<<< HEAD
-    Cur_block.results('mean','has_target') = {mean(Cur_block.rt(target_trails))};
-    Cur_block.results('mean','no_target') = {mean(Cur_block.rt( no_target_trails))};
-    Cur_block.results('SD','has_target') = {std(Cur_block.rt(target_trails))};
-    Cur_block.results('SD','no_target') = {std(Cur_block.rt( no_target_trails))};
-=======
-    Cur_block = calc_mean_sd_per_cond(Cur_block,target_trails,no_target_trails);
-
->>>>>>> ad7d2759f4e646aa417e068edd7476897703fe38
-    Expirament.(cur_block_name) = Cur_block; 
+    Cur_block = calc_mean_sd_per_cond(Cur_block,target_trails);
+    Cur_block = calc_mean_sd_per_cond(Cur_block,no_target_trails);
+    
+    Expirament.(cur_block_name) = Cur_block;
+    [r_with_target,p_with_target] = calculat_pval_cor(Cur_block.set_size,Cur_block.results('mean','has_target'));
+    [r_no_target,p_no_target] = calculat_pval_cor(Cur_block.set_size,Cur_block.results('mean','no_target'));
+    Expirament.All_results.rho(Cur_block.condition,'has_target') = r_with_target;
+    Expirament.All_results.rho(Cur_block.condition,'no_target') = r_no_target;
+    Expirament.All_results.p_val(Cur_block.condition,'has_target') = p_with_target;
+    Expirament.All_results.p_val(Cur_block.condition,'no_target') = p_no_target;
 end
+
+[mean_target,mean_no_target,SD_target,SD_no_target] = collecting_data_by_search_type(Expirament,num_of_blocks,'feat');
+[mean_target,mean_no_target,SD_target,SD_no_target] = collecting_data_by_search_type(Expirament,num_of_blocks,'feat');   
  close all force;
 
