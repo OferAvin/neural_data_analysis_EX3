@@ -15,6 +15,7 @@ inst = text(0.5,0.5,...
     ' ' ' ' 'Press Spacebar to start the experiment.'}...
     ,'HorizontalAlignment' , 'center','FontSize',14);
 space_to_continue;
+clf;
 %% experiment parameters
 num_of_blocks = 8;
 num_of_trails = 30;

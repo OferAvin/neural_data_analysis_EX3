@@ -1,3 +1,5 @@
-function [fit_vec] = linear_fit(set_size,mean,num_of_deg)
-    line = polyfit(set_size,mean,num_of_deg);
-    fit_vec = polyval(line(1),set_size);
+%this function perform linear fit (degree of polinum is 1)
+%it returns the calculated valuse after using the fitted function
+function [fit_vec] = linear_fit(x,y)
+    line = polyfit(x,y,1);
+    fit_vec = polyval(line(1),x);
