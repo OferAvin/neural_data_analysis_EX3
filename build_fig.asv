@@ -1,7 +1,7 @@
 %this function creates the trail figure, it uses conj_fig 
 %in case its a conjunction condition and feat_fig for feature condition
 %the function gets the Block, trail type(target/not-target) - has_target,
-%target,color and locations of all shapes
+%target,color and locations of all 
 function build_fig(Block,has_target,target,non_target,target_color,non_target_color,num_of_trail, x_vec,y_vec)
     shapes_num = Block.set_size;
     if num_of_trail==1

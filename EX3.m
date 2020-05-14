@@ -54,13 +54,12 @@ for i = 1:num_of_blocks
     cur_block_name = (char("B"+i));
     Cur_block = Expirament.(cur_block_name);
     
-    target_trails = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.has_target, 1);
+    target_trails = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.has_target, 1);     
     no_target_trails = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.has_target, 0);
     
-    Cur_block.results('mean','has_target') = {mean(Cur_block.rt(target_trails))};
-    Cur_block.results('mean','no_target') = {mean(Cur_block.rt( no_target_trails))};
-    Cur_block.results('SD','has_target') = {std(Cur_block.rt(target_trails))};
-    Cur_block.results('SD','no_target') = {std(Cur_block.rt( no_target_trails))};
+    Cur_block = calc_mean_sd_per_cond(Cur_block,target_trails);
+    Cur_block = calc_mean_sd_per_cond(Cur_block,no_target_trails);
+    
     Expirament.(cur_block_name) = Cur_block; 
 end
 
