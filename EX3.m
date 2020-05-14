@@ -1,7 +1,7 @@
 clc; clear;
 %% figure def
 H = figure('units','normalized','position' ,[0 0 1 1]);
-space_to_continue;
+%space_to_continue;
 set(H,'Name','Visual Search Experiment');
 set(H,'MenuBar','none');
 set(H,'ToolBar','none');
