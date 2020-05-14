@@ -1,0 +1,9 @@
+In order to reproccess the raw data-
+1) Open the main code.
+2) Run the setting parametrs section.
+3) Load the 3 data files - Conjunction raw , Feature raw , Blocks order into workspace.
+4) Run the filtter section.
+5) Run th e analysis section.
+6) Run the plotting section.
+
+the raw data is organized according to the specific blocks order that was presented' it is crucial to use th eblocks order data file.

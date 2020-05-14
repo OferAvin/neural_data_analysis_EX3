@@ -11,7 +11,7 @@ fontsize = 20;
 % welcome_pic = imread('תמונת ניסוי.jpg');
 
 %% loop through entire experiment
-while 1
+% while 1
 %welcome pic and wait till user spacebar
 % image(welcome_pic); 
 axis off;
@@ -70,9 +70,9 @@ for i = 1:block_num
     for j = 1:trial_num %run the block's trial according to block def
         [trial_data.rt{i}(j),trial_data.acc{i}(j)] = trial(block_data(block_order(i),:),rand_yn(i,j),chosen_shape,not_chosen_shape,rand_color(i,j));
     end
-end 
+% end 
 
-save('initial_data.mat','-struct', 'trial_data');
+% save('initial_data.mat','-struct', 'trial_data');
 
 %% filer out irrelevants
 
@@ -83,39 +83,39 @@ min_trials_block = 20;
 min_trials_overall  = 160;
 
 %loop through blocks
-for i = 1:block_num
-    idx_acc = find(trial_data.acc{i} == 0); %find wrong trials
-    idx_rt = find(trial_data.rt{i} > time_lim); %find too long trials
-    trial_data.rt{i}(union(idx_acc,idx_rt)) = []; %delete wrong and too long trials from data
-    trial_data.acc{i}(union(idx_acc,idx_rt)) = [];
-    trial_data.target{i} = rand_yn(i,setdiff(1:end,[union(idx_acc,idx_rt)])); %create a cell array for target present or absent of the remainig trials
-   
-    if numel(trial_data.rt{i}) < min_trials_block %check if enough trials per block
-        flag = 1;
-        break
-    end
-    
+% for i = 1:block_num
+%     idx_acc = find(trial_data.acc{i} == 0); %find wrong trials
+%     idx_rt = find(trial_data.rt{i} > time_lim); %find too long trials
+%     trial_data.rt{i}(union(idx_acc,idx_rt)) = []; %delete wrong and too long trials from data
+%     trial_data.acc{i}(union(idx_acc,idx_rt)) = [];
+%     trial_data.target{i} = rand_yn(i,setdiff(1:end,[union(idx_acc,idx_rt)])); %create a cell array for target present or absent of the remainig trials
+%    
+%     if numel(trial_data.rt{i}) < min_trials_block %check if enough trials per block
+%         flag = 1;
+%         break
+%     end
+%     
+% end 
+% 
+% if sum(cellfun(@length,trial_data.rt)) < min_trials_overall %check if enough trials overall
+%         flag = 1;
+% end 
+
+% if flag == 1 %if not enough trials
+%     %text to let the user know not enough trials and how to continue
+%     text(0.5,0.5,{'not enough valid trials', 'do you want to try again?',...
+%         ' ' , 'press Y for yes or N for no'},'FontSize',fontsize,'FontName'...
+%         ,'Calibri Light','HorizontalAlignment','center');
+%     pause; key = get(gcf,'CurrentCharacter'); %get user answer
+%     if strcmpi(key,'n') %if user doesnt want to carry on- break the while loop
+%         break;
+%     end
+% elseif flag == 0 %if enough trials break the while loop
+%     break;
+% end 
 end 
 
-if sum(cellfun(@length,trial_data.rt)) < min_trials_overall %check if enough trials overall
-        flag = 1;
-end 
-
-if flag == 1 %if not enough trials
-    %text to let the user know not enough trials and how to continue
-    text(0.5,0.5,{'not enough valid trials', 'do you want to try again?',...
-        ' ' , 'press Y for yes or N for no'},'FontSize',fontsize,'FontName'...
-        ,'Calibri Light','HorizontalAlignment','center');
-    pause; key = get(gcf,'CurrentCharacter'); %get user answer
-    if strcmpi(key,'n') %if user doesnt want to carry on- break the while loop
-        break;
-    end
-elseif flag == 0 %if enough trials break the while loop
-    break;
-end 
-end 
-
-save('filtered_data.mat','-struct', 'trial_data'); %save filtered data
+% save('filtered_data.mat','-struct', 'trial_data'); %save filtered data
 
 
 %% plots
