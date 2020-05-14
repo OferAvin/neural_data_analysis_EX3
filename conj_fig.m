@@ -1,5 +1,6 @@
+%this function builds a conjunction figure
 function conj_fig(shapes_num,has_target,target,non_target,target_color,non_target_color,x_vec,y_vec)
-        shapes = strings(1,shapes_num);
+        shapes = strings(1,shapes_num);									
         shapes(1:shapes_num/2) = target;
         shapes(shapes_num/2+1:end) = non_target;
         if has_target == 1
@@ -13,3 +14,4 @@ function conj_fig(shapes_num,has_target,target,non_target,target_color,non_targe
         text(x_vec(shapes_num/2+1:end),y_vec(shapes_num/2+1:end),...
             shapes(shapes_num/2+1:end),'Color',target_color);    
     end
+end

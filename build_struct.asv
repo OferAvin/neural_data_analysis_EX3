@@ -15,6 +15,6 @@ function S = build_struct(size,cond,set_sizes,trial_num)
         cur_block = char("B" + i);
         S.(cur_block) = GenericBlock; 
         S.(cur_block).condition = cond(cur_cond);
-        S.(cur_block).set_size = set_sizes(mod(i,num_of_sizes));
+        S.(cur_block).set_size = set_sizes(mod(i-1,num_of_sizes)+1);
     end
 end

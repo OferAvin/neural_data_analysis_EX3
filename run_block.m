@@ -1,3 +1,6 @@
+%this function run all trails of the specified block,
+%it determines the target shape and the figure parameters(locations,colors),
+%builds the figures and collects the data
 function Block = run_block(Block,shapes_vec,color_vec,num_of_trails)
     [target_shape,none_target_shape,has_target_vec] = rand_target(shapes_vec,num_of_trails);
     Block.has_target = has_target_vec';
