@@ -21,10 +21,11 @@ set_sizes = [4,8,12,16];
 stimuli_shape = ["X", "O"];
 color_vec = ["b","r"];
 
+%% creating all data struct
 Expirament = build_struct(num_of_blocks,cond,set_sizes,num_of_trails);
-
 block_order = randperm(num_of_blocks);
 
+%% collect data
 for i = block_order   
     cur_block_name = (char("B"+i));
     Expirament.(cur_block_name) = run_block(Expirament.(cur_block_name),stimuli_shape,color_vec,num_of_trails);
