@@ -1,12 +1,14 @@
-function S = build_struct(size,cond,set_sizes,trial_num)
+function S = build_struct(size,cond,has_target,set_sizes,trial_num)
     num_of_sizes = length(set_sizes);
-    sizesZer = zeros(1,num_of_sizes);
     trailZzer = zeros(trial_num,1);
     bool = true(trial_num,1);
-    block_results = build_table(["has_target", "no_target"],["mean","SD"]);
-    generic_res_table = build_table(cond,["has_target", "no_target"]);
+    
+    generic_res_table1 = build_double_table(["mean","SD"],has_target);
+    generic_res_table2 = build_cell_table(cond,has_target,num_of_sizes);
+    
     GenericBlock = struct('condition', "", 'set_size', 0,...
-        'has_target', bool, 'acc', bool,'rt', trailZzer, 'passed',bool,'results',block_results);
+        'has_target', bool, 'acc', bool,'rt', trailZzer, 'passed',bool,'block_results',generic_res_table1);
+
     cur_cond = 0;
     for i = 1:size
         if mod(i - 1,num_of_sizes) == 0
@@ -18,8 +20,6 @@ function S = build_struct(size,cond,set_sizes,trial_num)
         S.(cur_block).set_size = set_sizes(mod(i-1,num_of_sizes)+1);
     end
 
-    S.All_results = struct('meanTargetFeat',sizesZer,'SDTargetFeat',sizesZer,...
-        'meanNoTargetFeat',sizesZer,'SDNoTargetFeat',sizesZer,'meanTargetConj',sizesZer,...
-        'SDTargetConj',sizesZer,'meanNoTargetConj',sizesZer,'SDNoTargetConj',sizesZer,...
-        'p_val',generic_res_table,'rho',generic_res_table,'fit',generic_res_table);
+    S.All_results = struct('mean', generic_res_table2 ,'sd',generic_res_table2,...
+        'p_val',generic_res_table1,'rho',generic_res_table1,'fit',generic_res_table1);
 end
