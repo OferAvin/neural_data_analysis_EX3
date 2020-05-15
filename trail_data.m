@@ -1,5 +1,5 @@
-%this function collects response time and marks good and bad response
-function[acc,rt] = trail_result(has_target)
+%this function collects response time and marks correct and wrong responses
+function[acc,rt] = trail_data(has_target)
 	tic
 	if has_target == 1
 		correct = 'a';
