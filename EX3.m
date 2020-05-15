@@ -10,7 +10,7 @@ axis off
 expirament_instractions(fontsize);
 %% experiment parameters
 num_of_blocks = 8;
-num_of_trails = 4;
+num_of_trails = 20;
 max_time_in_sec = 4;
 min_time_in_sec = 0.1;
 min_correct_ans_per_block = 10;
@@ -23,10 +23,11 @@ stimuli_shape = ["X", "O"];
 color_vec = ["b","r"];
 
 %% creating all data struct
-Expirament = build_struct(num_of_blocks,cond,has_target,set_sizes,num_of_trails);
-block_order = randperm(num_of_blocks);
+Expirament = build_struct(num_of_blocks,cond,has_target,set_sizes,num_of_trails); 
 
 %% collect data
+block_order = randperm(num_of_blocks);
+
 for i = block_order   
     cur_block_name = (char("B"+i));
     Expirament.(cur_block_name) = run_block(Expirament.(cur_block_name),...
@@ -74,6 +75,39 @@ Expirament.All_results.p_val('conj','no_target') = {p_conj_no_target};
 Expirament.All_results.p_val('feat','has_target') = {p_feat_target};
 Expirament.All_results.p_val('feat','no_target') = {p_feat_no_target};
 
+% fitting function for each condition and target
+Expirament.All_results.fit.has_target{1} = linear_fit(set_sizes,Expirament.All_results.mean.has_target{1});
+Expirament.All_results.fit.no_target{1} = linear_fit(set_sizes,Expirament.All_results.mean.no_target{1});
+Expirament.All_results.fit.has_target{2} = linear_fit(set_sizes,Expirament.All_results.mean.has_target{2});
+Expirament.All_results.fit.no_target{2} = linear_fit(set_sizes,Expirament.All_results.mean.no_target{2});
 close all force;
 
+%% Plotting
 
+figure('Color', 'white', 'Units', 'centimeters', 'Position' ,[7 ,2, 20, 12]);
+hold on;
+
+%has target scenario
+errorbar(set_sizes,Expirament.All_results.mean.has_target{1},Expirament.All_results.sd.has_target{1},...
+    'r','LineWidth',0.5);
+plot(set_sizes,Expirament.All_results.mean.has_target{1},'Color',[0.5,0.7,0.1]);
+plot(set_sizes,Expirament.All_results.fit.has_target{1},'c','LineStyle','-.')
+
+errorbar(set_sizes,Expirament.All_results.mean.has_target{2},Expirament.All_results.sd.has_target{2},...
+    'b','LineWidth',0.5);
+plot(set_sizes,Expirament.All_results.mean.has_target{2},'Color',[0,0.7,0.9]);
+plot(set_sizes,Expirament.All_results.fit.has_target{2},'m','LineStyle','-.')
+
+%no target scenario
+figure('Color', 'white', 'Units', 'centimeters', 'Position' ,[7 ,2, 20, 12]);
+hold on;
+
+errorbar(set_sizes,Expirament.All_results.mean.no_target{1},Expirament.All_results.sd.no_target{1},...
+    'r','LineWidth',0.5);
+plot(set_sizes,Expirament.All_results.mean.no_target{1},'Color',[0.5,0.7,0.1]);
+plot(set_sizes,Expirament.All_results.fit.no_target{1},'c','LineStyle','-.')
+
+errorbar(set_sizes,Expirament.All_results.mean.no_target{2},Expirament.All_results.sd.no_target{2},...
+    'b','LineWidth',0.5);
+plot(set_sizes,Expirament.All_results.mean.no_target{2},'Color',[0,0.7,0.9]);
+plot(set_sizes,Expirament.All_results.fit.no_target{2},'m','LineStyle','-.')

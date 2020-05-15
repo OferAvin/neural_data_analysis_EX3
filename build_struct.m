@@ -21,5 +21,5 @@ function S = build_struct(size,cond,has_target,set_sizes,trial_num)
     end
 
     S.All_results = struct('mean', generic_res_table2 ,'sd',generic_res_table2,...
-        'p_val',generic_res_table1,'rho',generic_res_table1,'fit',generic_res_table1);
+        'p_val',generic_res_table1,'rho',generic_res_table1,'fit',generic_res_table2);
 end

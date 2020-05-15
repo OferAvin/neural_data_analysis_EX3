@@ -10,5 +10,5 @@ function [Expirament,avg,sd] = calc_mean_sd_per_cond(Expirament,block_idx,to_cal
     Expirament.(cur_block_name).block_results('mean',char(has_target)) = {avg};
     Expirament.(cur_block_name).block_results('SD',char(has_target)) = {sd};
     Expirament.All_results.mean.(has_target){cond_idx}(set_size/num_of_sizes) = avg;
-    Expirament.All_results.mean.(has_target){cond_idx}(set_size/num_of_sizes) = sd;
+    Expirament.All_results.sd.(has_target){cond_idx}(set_size/num_of_sizes) = sd;
 end
