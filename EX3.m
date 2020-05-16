@@ -24,7 +24,7 @@ color_vec = ["b","r"];
 
 %% Plot Parameters
 title = ["Target was Presented","Target was absent"];
-axis_lables = ["Set Size","Response Time"];
+axis_lables = ["Set Size","Response Time[sec]"];
 P1_cor1=[0.1,0.4,0.9]; P1_cor2=[0.8,0.6,0.3];P1_cor3=[0.4,0.8,0.6];
 P2_cor1=[0.7,0.7,0.3]; P2_cor2=[0.8,0.4,0.1];P2_cor3='g';
 P3_cor1=[0.7,0.6,0.2]; P3_cor2=[0.8,0.2,0.6];P3_cor3=[0.3,0.6,0.8];
@@ -98,7 +98,7 @@ close all force;
 
 %% Plotting
 %has target scenario
-figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.05, 1, 0.42]);
+figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.08, 1, 0.42]);
 hold on;
 
 plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(1),...
@@ -107,7 +107,7 @@ plot_condition(Expirament.All_results,set_sizes,cond(2),scenario(1),...
     title(1),axis_lables,P2_cor1,P2_cor2,P2_cor3)
 
 %no target scenario
-figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.42, 1, 0.37]);
+figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.50, 1, 0.34]);
 hold on;
 
 plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(2)...
