@@ -11,8 +11,8 @@ expirament_instractions(fontsize);
 %% experiment parameters
 num_of_blocks = 8;
 num_of_trails = 4;
-max_time_in_sec = 4;
-min_time_in_sec = 0.1;
+max_rt_in_sec = 4;
+min_rt_in_sec = 0.1;
 min_correct_ans_per_block = 10;
 min_correct_ans = 160;
 
@@ -26,10 +26,13 @@ color_vec = ["b","r"];
 %% Plot Parameters
 title = ["Target was Presented","Target was absent"];
 axis_lables = ["Set Size","Response Time[sec]"];
-P1_cor1=[0.1,0.4,0.9]; P1_cor2=[0.8,0.6,0.3];P1_cor3=[0.4,0.8,0.6];
-P2_cor1=[0.7,0.7,0.3]; P2_cor2=[0.2,0.4,0.1];P2_cor3='g';
-P3_cor1=[0.7,0.6,0.2]; P3_cor2=[0.8,0.2,0.6];P3_cor3=[0.3,0.6,0.8];
-P4_cor1=[0.5,0.5,0.2]; P4_cor2=[0.8,0.1,0.3];P4_cor3='b';
+results_text = ["Con P = ","Con R = ","Feat P = ","Feat R = "];
+text_to_legend = ["Conjunction","Conjunction fit","Feature","Feature fit"];
+y_lim = [0,max_rt_in_sec];
+P1_cor1=[0.1,0.4,0.9]; P1_cor2=[0.8,0.6,0.3];
+P2_cor1=[0.7,0.7,0.3]; P2_cor2=[0.2,0.4,0.1];
+P3_cor1=[0.7,0.6,0.2]; P3_cor2=[0.8,0.2,0.6];
+P4_cor1=[0.5,0.5,0.2]; P4_cor2=[0.8,0.1,0.3];
 
 %% creating all data structure
 Expirament = build_struct(num_of_blocks,cond,scenario,set_sizes,num_of_trails);
@@ -50,7 +53,7 @@ count_valid = 0;
 for i = 1:num_of_blocks
     cur_block_name = (char("B"+i));
     [Expirament.(cur_block_name),has_passed,num_of_valid_ans] = ...
-        is_valid_block(Expirament.(cur_block_name),min_correct_ans_per_block,max_time_in_sec,min_time_in_sec);
+        is_valid_block(Expirament.(cur_block_name),min_correct_ans_per_block,max_rt_in_sec,min_rt_in_sec);
     count_valid = count_valid + num_of_valid_ans;
      if has_passed == 0
          error('not enough correct answer per block');
@@ -110,17 +113,17 @@ figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.08, 1, 0.42]);
 hold on;
 
 plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(1),...
-    title(1),axis_lables,P1_cor1,P1_cor2,P1_cor3)
+    title(1),axis_lables,P1_cor1,P1_cor2,y_lim)
 plot_condition(Expirament.All_results,set_sizes,cond(2),scenario(1),...
-    title(1),axis_lables,P2_cor1,P2_cor2,P2_cor3)
-add_text_to_figure(Expirament.All_results,cond,scenario(1))
+    title(1),axis_lables,P2_cor1,P2_cor2,y_lim)
+add_text_to_figure(Expirament.All_results,cond,scenario(1),results_text)
 
 %no target scenario
 figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.50, 1, 0.34]);
 hold on;
 
 plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(2)...
-    ,title(2),axis_lables,P3_cor1,P3_cor2,P3_cor3)
+    ,title(2),axis_lables,P3_cor1,P3_cor2,y_lim)
 plot_condition(Expirament.All_results,set_sizes,cond(2),scenario(2)...
-    ,title(2),axis_lables,P4_cor1,P4_cor2,P4_cor3)
-add_text_to_figure(Expirament.All_results,cond,scenario(2))
+    ,title(2),axis_lables,P4_cor1,P4_cor2,y_lim)
+add_text_to_figure(Expirament.All_results,cond,scenario(2),results_text)

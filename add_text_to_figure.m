@@ -1,13 +1,14 @@
-function add_text_to_figure(Data,condition,scenario)
+function add_text_to_figure(Data,condition,scenario,text_to_results,text_to_legend)
     hold on;
-    conj_rho_text = condition(1) + ' rho = ' + num2str(Data.rho.(scenario)(condition(1)));
-    conj_p_val_text = condition(1) + ' p-val = ' + num2str(Data.p_val.(scenario)(condition(1)));
-    feat_rho_text = condition(2) + ' rho = ' + num2str(Data.rho.(scenario)(condition(2)));
-    feat_p_val_text = condition(2) + ' p-val = ' + num2str(Data.p_val.(scenario)(condition(2)));
+    conj_rho_text = text_to_results(2) + num2str(Data.rho.(scenario)(condition(1)));
+    conj_p_val_text = text_to_results(1) + num2str(Data.p_val.(scenario)(condition(1)));
+    feat_rho_text = text_to_results(4) + num2str(Data.rho.(scenario)(condition(2)));
+    feat_p_val_text =text_to_results(3) + num2str(Data.p_val.(scenario)(condition(2)));
     
     txt = {conj_rho_text, conj_p_val_text, feat_rho_text, feat_p_val_text};
-    text(13,1.5,txt ,'VerticalAlignment','top','FontSize',7);
-    legend('conjunction' , 'feature','conjunction fit','feature fit','location','northwest','FontSize',7)
+    text_to_results(13,1.5,txt ,'VerticalAlignment','top','FontSize',7);
+    legend(text_to_legend(1),text_to_legend(2),text_to_legend(3),text_to_legend(4)...
+        ,'location','northwest','FontSize',7)
 end
 
     
