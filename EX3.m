@@ -10,7 +10,7 @@ axis off
 expirament_instractions(fontsize);
 %% experiment parameters
 num_of_blocks = 8;
-num_of_trails = 20;
+num_of_trails = 30;
 max_time_in_sec = 4;
 min_time_in_sec = 0.1;
 min_correct_ans_per_block = 10;
@@ -98,7 +98,7 @@ close all force;
 
 %% Plotting
 %has target scenario
-figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.05, 0.5, 0.84]);
+figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.05, 1, 0.42]);
 hold on;
 
 plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(1),...
@@ -107,7 +107,7 @@ plot_condition(Expirament.All_results,set_sizes,cond(2),scenario(1),...
     title(1),axis_lables,P2_cor1,P2_cor2,P2_cor3)
 
 %no target scenario
-figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0.5 ,0.05, 0.5, 0.84]);
+figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.42, 1, 0.37]);
 hold on;
 
 plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(2)...
