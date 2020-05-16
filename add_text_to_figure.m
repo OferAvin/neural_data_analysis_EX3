@@ -6,10 +6,9 @@ function add_text_to_figure(Data,condition,scenario,text_to_results,text_to_lege
     feat_p_val_text =text_to_results(3) + num2str(Data.p_val.(scenario)(condition(2)));
     
     txt = {conj_rho_text, conj_p_val_text, feat_rho_text, feat_p_val_text};
-    text_to_results(13,1.5,txt ,'VerticalAlignment','top','FontSize',7);
+    text(14.5,0.9,txt ,'VerticalAlignment','top','FontSize',8);
     legend(text_to_legend(1),text_to_legend(2),text_to_legend(3),text_to_legend(4)...
-        ,'location','northwest','FontSize',7)
->>>>>>> tamir_plot
+        ,'location','northwest','FontSize',8)
 end
 
     

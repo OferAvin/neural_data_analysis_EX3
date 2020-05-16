@@ -11,7 +11,7 @@ expirament_instractions(fontsize);
 %% experiment parameters
 num_of_blocks = 8;
 num_of_trails = 4;
-max_rt_in_sec = 4;
+max_rt_in_sec = 3;
 min_rt_in_sec = 0.1;
 min_correct_ans_per_block = 10;
 min_correct_ans = 160;
@@ -116,7 +116,7 @@ plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(1),...
     title(1),axis_lables,P1_cor1,P1_cor2,y_lim)
 plot_condition(Expirament.All_results,set_sizes,cond(2),scenario(1),...
     title(1),axis_lables,P2_cor1,P2_cor2,y_lim)
-add_text_to_figure(Expirament.All_results,cond,scenario(1),results_text)
+add_text_to_figure(Expirament.All_results,cond,scenario(1),results_text,text_to_legend)
 
 %no target scenario
 figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.50, 1, 0.34]);
@@ -126,4 +126,4 @@ plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(2)...
     ,title(2),axis_lables,P3_cor1,P3_cor2,y_lim)
 plot_condition(Expirament.All_results,set_sizes,cond(2),scenario(2)...
     ,title(2),axis_lables,P4_cor1,P4_cor2,y_lim)
-add_text_to_figure(Expirament.All_results,cond,scenario(2),results_text)
+add_text_to_figure(Expirament.All_results,cond,scenario(2),results_text,text_to_legend)
