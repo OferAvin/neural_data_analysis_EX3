@@ -10,7 +10,7 @@ axis off
 expirament_instractions(fontsize);
 %% experiment parameters
 num_of_blocks = 8;
-num_of_trails = 4;
+num_of_trails = 1;
 max_rt_in_sec = 4;
 min_rt_in_sec = 0.1;
 min_correct_ans_per_block = 10;
@@ -38,14 +38,14 @@ P4_cor1=[0.5,0.5,0.2]; P4_cor2=[0.8,0.1,0.3];
 Expirament = build_struct(num_of_blocks,cond,scenario,set_sizes,num_of_trails);
 
 %% collect data
-block_order = randperm(num_of_blocks);          %determining bolck order randomizingly
+block_order = randperm(num_of_blocks);          %determining bolck order randomly
 
 for i = block_order                             %running through blocks by block_order
     cur_block_name = (char("B"+i));             
     Expirament.(cur_block_name) = run_block(Expirament.(cur_block_name),...
         stimuli_shape,color_vec,num_of_trails,fontsize);
 end
-save('raw data' , 'Expirament'); 
+% save('raw data' , 'Expirament'); 
 %% pre processing
 %checking for wrong/bad results, in case not enough good data will not 
 %move on to analysis
@@ -55,13 +55,13 @@ for i = 1:num_of_blocks
     [Expirament.(cur_block_name),has_passed,num_of_valid_ans] = ...
         is_valid_block(Expirament.(cur_block_name),min_correct_ans_per_block,max_rt_in_sec,min_rt_in_sec);
     count_valid = count_valid + num_of_valid_ans;
-     if has_passed == 0
-         error('not enough correct answer per block');
-     end
+%      if has_passed == 0
+%          error('not enough correct answer per block');
+%      end
 end
-if count_valid < min_correct_ans
-    error('not enough correct answer for expirament');
-end
+% if count_valid < min_correct_ans
+%     error('not enough correct answer for expirament');
+% end
 
         
 %% Analisys
@@ -104,7 +104,7 @@ Expirament.All_results.fit.(scenario(1)){cond(2)} = ...
 Expirament.All_results.fit.(scenario(2)){cond(2)} = ...
     linear_fit(set_sizes,Expirament.All_results.mean.(scenario(2)){cond(2)});
 
-save('post proccesing and analisys data', 'Expirament');
+% save('post proccesing and analisys data', 'Expirament');
 close all force;
 
 %% Plotting
