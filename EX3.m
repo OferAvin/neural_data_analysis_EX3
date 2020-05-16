@@ -10,7 +10,7 @@ axis off
 expirament_instractions(fontsize);
 %% experiment parameters
 num_of_blocks = 8;
-num_of_trails = 30;
+num_of_trails = 4;
 max_time_in_sec = 4;
 min_time_in_sec = 0.1;
 min_correct_ans_per_block = 10;

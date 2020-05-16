@@ -3,12 +3,14 @@
 %parameters, data and results. there is another structure all results from
 %all blocks
 function S = build_struct(size,cond,scenario,set_sizes,trial_num)
+    mean_sd = ["mean","SD"];
     num_of_sizes = length(set_sizes);
     trailZzer = zeros(trial_num,1);
     bool = true(trial_num,1);
     
-    generic_res_table1 = build_double_table(["mean","SD"],scenario);        
+    generic_res_table1 = build_double_table(mean_sd,scenario); 
     generic_res_table2 = build_cell_table(cond,scenario,num_of_sizes);
+    generic_res_table3 = build_double_table(cond,scenario,num_of_sizes);
     
     GenericBlock = struct('condition', "", 'set_size', 0,...
         'has_target', bool, 'acc', bool,'rt', trailZzer, 'passed',bool,'block_results',generic_res_table1);
@@ -27,5 +29,5 @@ function S = build_struct(size,cond,scenario,set_sizes,trial_num)
     
     %creating all results structure
     S.All_results = struct('mean', generic_res_table2 ,'sd',generic_res_table2,...
-        'p_val',generic_res_table1,'rho',generic_res_table1,'fit',generic_res_table2);
+        'p_val',generic_res_table3,'rho',generic_res_table3,'fit',generic_res_table2);
 end
