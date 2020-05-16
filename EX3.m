@@ -8,7 +8,7 @@ set(H,'Color','w');
 fontsize = 14;
 axis off
 expirament_instractions(fontsize);
-%% experiment parameters
+%% Experiment parameters
 num_of_blocks = 8;
 num_of_trails = 1;
 max_rt_in_sec = 4;
