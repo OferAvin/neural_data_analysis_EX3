@@ -27,7 +27,7 @@ color_vec = ["b","r"];
 title = ["Target was Presented","Target was absent"];
 axis_lables = ["Set Size","Response Time[sec]"];
 P1_cor1=[0.1,0.4,0.9]; P1_cor2=[0.8,0.6,0.3];P1_cor3=[0.4,0.8,0.6];
-P2_cor1=[0.7,0.7,0.3]; P2_cor2=[0.8,0.4,0.1];P2_cor3='g';
+P2_cor1=[0.7,0.7,0.3]; P2_cor2=[0.2,0.4,0.1];P2_cor3='g';
 P3_cor1=[0.7,0.6,0.2]; P3_cor2=[0.8,0.2,0.6];P3_cor3=[0.3,0.6,0.8];
 P4_cor1=[0.5,0.5,0.2]; P4_cor2=[0.8,0.1,0.3];P4_cor3='b';
 
@@ -100,6 +100,7 @@ Expirament.All_results.fit.(scenario(1)){cond(2)} = ...
     linear_fit(set_sizes,Expirament.All_results.mean.(scenario(1)){cond(2)});
 Expirament.All_results.fit.(scenario(2)){cond(2)} = ...
     linear_fit(set_sizes,Expirament.All_results.mean.(scenario(2)){cond(2)});
+
 save('post proccesing and analisys data', 'Expirament');
 close all force;
 
