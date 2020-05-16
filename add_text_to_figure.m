@@ -7,7 +7,7 @@ function add_text_to_figure(Data,condition,scenario)
     
     txt = {conj_rho_text, conj_p_val_text, feat_rho_text, feat_p_val_text};
     text(13,1.5,txt ,'VerticalAlignment','top','FontSize',7);
-    legend('conjunction' , 'feature','conjunction fit','feature fit','location','northwest','FontSize',7)
+    legend('conjunction' , 'feature','conjunction fit','feature fit','aaa','bbbb','location','northwest','FontSize',7)
 end
 
     
