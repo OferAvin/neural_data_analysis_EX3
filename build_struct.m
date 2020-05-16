@@ -10,7 +10,7 @@ function S = build_struct(size,cond,scenario,set_sizes,trial_num)
     
     generic_res_table1 = build_double_table(mean_sd,scenario); 
     generic_res_table2 = build_cell_table(cond,scenario,num_of_sizes);
-    generic_res_table3 = build_double_table(cond,scenario,num_of_sizes);
+    generic_res_table3 = build_double_table(cond,scenario);
     
     GenericBlock = struct('condition', "", 'set_size', 0,...
         'has_target', bool, 'acc', bool,'rt', trailZzer, 'passed',bool,'block_results',generic_res_table1);
