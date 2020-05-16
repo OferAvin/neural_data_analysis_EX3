@@ -11,7 +11,7 @@ expirament_instractions(fontsize);
 %% experiment parameters
 num_of_blocks = 8;
 num_of_trails = 4;
-max_rt_in_sec = 3;
+max_rt_in_sec = 4;
 min_rt_in_sec = 0.1;
 min_correct_ans_per_block = 10;
 min_correct_ans = 160;
@@ -109,7 +109,7 @@ close all force;
 
 %% Plotting
 %has target scenario
-figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.08, 1, 0.42]);
+figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0, 1, 1]);
 hold on;
 
 plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(1),...
@@ -119,7 +119,7 @@ plot_condition(Expirament.All_results,set_sizes,cond(2),scenario(1),...
 add_text_to_figure(Expirament.All_results,cond,scenario(1),results_text,text_to_legend)
 
 %no target scenario
-figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.50, 1, 0.34]);
+figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0, 1, 1]);
 hold on;
 
 plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(2)...
