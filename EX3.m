@@ -22,7 +22,15 @@ num_of_sizes = length(set_sizes);
 stimuli_shape = ["X", "O"];
 color_vec = ["b","r"];
 
-%% creating all data struct
+%% Plot Parameters
+title = ["Target was Presented","Target was absent"];
+axis_lables = ["Set Size","Response Time"];
+P1_cor1=[0.1,0.4,0.9]; P1_cor2=[0.8,0.6,0.3];P1_cor3=[0.4,0.8,0.6];
+P2_cor1=[0.7,0.7,0.3]; P2_cor2=[0.8,0.4,0.1];P2_cor3='g';
+P3_cor1=[0.7,0.6,0.2]; P3_cor2=[0.8,0.2,0.6];P3_cor3=[0.3,0.6,0.8];
+P4_cor1=[0.5,0.5,0.2]; P4_cor2=[0.8,0.1,0.3];P4_cor3='b';
+
+%% creating all data structure
 Expirament = build_struct(num_of_blocks,cond,scenario,set_sizes,num_of_trails);
 
 %% collect data
@@ -35,7 +43,6 @@ for i = block_order                             %running through blocks by block
 end
 
 %% pre processing
-
 %checking for wrong/bad results, in case not enough good data will not 
 %move on to analysis
 for i = 1:num_of_blocks
@@ -48,56 +55,62 @@ for i = 1:num_of_blocks
 end
 
 %% Analisys
-
 %calculating mean & SD
 for i = 1:num_of_blocks
     cur_block_name = (char("B"+i));
     Cur_block = Expirament.(cur_block_name);
     
-    target_trails = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.has_target, 1);     
-    no_target_trails = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.has_target, 0);
+    inter1 = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.(scenario(1)), 1);     
+    inter2 = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.(scenario(1)), 0);
     
-    Expirament = calc_mean_sd_per_cond(Expirament,i,target_trails,"has_target",num_of_sizes);
-    Expirament = calc_mean_sd_per_cond(Expirament,i,no_target_trails,"no_target",num_of_sizes);
+    Expirament = calc_mean_sd_per_cond(Expirament,i,inter1,scenario(1),num_of_sizes);
+    Expirament = calc_mean_sd_per_cond(Expirament,i,inter2,scenario(2),num_of_sizes);
   
 end
 
 % calculating correlation and p-value
-[r_conj_target,p_conj_target] = calculat_pval_cor(set_sizes,Expirament.All_results.mean.has_target{1});
-[r_conj_no_target,p_conj_no_target] = calculat_pval_cor(set_sizes,Expirament.All_results.mean.no_target{1});
-[r_feat_target,p_feat_target] = calculat_pval_cor(set_sizes,Expirament.All_results.mean.has_target{2});
-[r_feat_no_target,p_feat_no_target] = calculat_pval_cor(set_sizes,Expirament.All_results.mean.no_target{2});
+[r1,p1] = calculat_pval_cor(set_sizes,Expirament.All_results.mean.(scenario(1)){cond(1)});
+[r2,p2] = calculat_pval_cor(set_sizes,Expirament.All_results.mean.(scenario(2)){cond(1)});
+[r3,p3] = calculat_pval_cor(set_sizes,Expirament.All_results.mean.(scenario(1)){cond(2)});
+[r4,p4] = calculat_pval_cor(set_sizes,Expirament.All_results.mean.(scenario(2)){cond(2)});
 
-Expirament.All_results.rho('conj','has_target') = {r_conj_target};
-Expirament.All_results.rho('conj','no_target') = {r_conj_no_target};
-Expirament.All_results.rho('feat','has_target') = {r_feat_target};
-Expirament.All_results.rho('feat','no_target') = {r_feat_no_target};
+Expirament.All_results.rho(cond(1),scenario(1)) = {r1};
+Expirament.All_results.rho(cond(1),scenario(2)) = {r2};
+Expirament.All_results.rho(cond(2),scenario(1)) = {r3};
+Expirament.All_results.rho(cond(2),scenario(2)) = {r4};
  
-Expirament.All_results.p_val('conj','has_target') = {p_conj_target};
-Expirament.All_results.p_val('conj','no_target') = {p_conj_no_target};
-Expirament.All_results.p_val('feat','has_target') = {p_feat_target};
-Expirament.All_results.p_val('feat','no_target') = {p_feat_no_target};
+Expirament.All_results.p_val(cond(1),scenario(1)) = {p1};
+Expirament.All_results.p_val(cond(1),scenario(2)) = {p2};
+Expirament.All_results.p_val(cond(2),scenario(1)) = {p3};
+Expirament.All_results.p_val(cond(2),scenario(2)) = {p4};
 
 % fitting function for each condition and target
-Expirament.All_results.fit.has_target{"conj"} = linear_fit(set_sizes,Expirament.All_results.mean.has_target{1});
-Expirament.All_results.fit.no_target{"conj"} = linear_fit(set_sizes,Expirament.All_results.mean.no_target{1});
-Expirament.All_results.fit.has_target{"feat"} = linear_fit(set_sizes,Expirament.All_results.mean.has_target{2});
-Expirament.All_results.fit.no_target{"feat"} = linear_fit(set_sizes,Expirament.All_results.mean.no_target{2});
+Expirament.All_results.fit.(scenario(1)){cond(1)} = ...
+    linear_fit(set_sizes,Expirament.All_results.mean.(scenario(1)){cond(1)});
+Expirament.All_results.fit.(scenario(2)){cond(1)} = ...
+    linear_fit(set_sizes,Expirament.All_results.mean.(scenario(2)){cond(1)});
+Expirament.All_results.fit.(scenario(1)){cond(2)} = ...
+    linear_fit(set_sizes,Expirament.All_results.mean.(scenario(1)){cond(2)});
+Expirament.All_results.fit.(scenario(2)){cond(2)} = ...
+    linear_fit(set_sizes,Expirament.All_results.mean.(scenario(2)){cond(2)});
 
 close all force;
 
 %% Plotting
-
-figure('Color', 'white', 'Units', 'centimeters', 'Position' ,[7 ,2, 20, 12]);
+%has target scenario
+figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0 ,0.05, 0.5, 0.84]);
 hold on;
 
-%has target scenario
-% plot_condition(Expirament.All_results,set_sizes,"conj","has_target",[0.1,0.4,0.9],[0.8,0.6,0.3],[0.4,0.8,0.6])
-% plot_condition(Expirament.All_results,set_sizes,"feat","has_target",[0.7,0.7,0.3],[0.8,0.4,0.1],'g')
+plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(1),...
+    title(1),axis_lables,P1_cor1,P1_cor2,P1_cor3)
+plot_condition(Expirament.All_results,set_sizes,cond(2),scenario(1),...
+    title(1),axis_lables,P2_cor1,P2_cor2,P2_cor3)
 
 %no target scenario
-figure('Color', 'white', 'Units', 'centimeters', 'Position' ,[7 ,2, 20, 12]);
+figure('Color', 'white', 'Units', 'normalized', 'Position' ,[0.5 ,0.05, 0.5, 0.84]);
 hold on;
 
-plot_condition(Expirament.All_results,set_sizes,"conj","no_target",[0.7,0.6,0.2],[0.8,0.6,0.3],[0.3,0.6,0.8])
-plot_condition(Expirament.All_results,set_sizes,"feat","no_target",[0.7,0.3,0.7],[0.4,0.4,0.8],'b')
+plot_condition(Expirament.All_results,set_sizes,cond(1),scenario(2)...
+    ,title(2),axis_lables,P3_cor1,P3_cor2,P3_cor3)
+plot_condition(Expirament.All_results,set_sizes,cond(2),scenario(2)...
+    ,title(2),axis_lables,P4_cor1,P4_cor2,P4_cor3)
