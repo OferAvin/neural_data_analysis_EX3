@@ -5,4 +5,5 @@ function plot_condition(Data,set_sizes,condition,scenario,title,ax_lable,data_co
     plot(set_sizes,Data.fit.(scenario){condition},'Color',fit_color,'LineStyle','-.')
     sgtitle(title);
     xlabel(ax_lable(1)); ylabel(ax_lable(2));
+   
 end
