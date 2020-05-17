@@ -1,4 +1,4 @@
-function expirament_instractions(fontsize)
+function expirament_instractions(fontsize,run_mod)
     inst = text(0.5,0.5,...
         {'Thank you for participating in the experiment.'  ' '  'In the following screens you will be presented with several shapes - X / O.'...
         'The shapes can be in differenet colors - red / blue.' 'The target will be determined at the start of each block.'...
@@ -6,6 +6,10 @@ function expirament_instractions(fontsize)
         'Make sure your keyboard language is set on english' ' ' 'Try to be as quick as possible while making sure to be right.' ...
         ' ' ' ' 'Press Spacebar to start the experiment.'}...
         ,'HorizontalAlignment' , 'center','FontSize',fontsize);
-    space_to_continue;
+    if run_mod == 0 
+        space_to_continue;
+    else
+        pause(3);
+    end
     clf;
 end

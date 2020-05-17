@@ -7,13 +7,13 @@ set(H,'ToolBar','none');
 set(H,'Color','w');
 fontsize = 14;
 axis off
-expirament_instractions(fontsize);
+
 %% Experiment parameters
 num_of_blocks = 8;
 num_of_trails = 30;
 max_rt_in_sec = 4;
 min_rt_in_sec = 0.1;
-min_correct_ans_per_block = 10;
+min_correct_ans_per_block = 20;
 min_correct_ans = 160;
 
 cond = ["conj","feat"];
@@ -22,6 +22,9 @@ set_sizes = [4,8,12,16];
 num_of_sizes = length(set_sizes);
 stimuli_shape = ["X", "O"];
 color_vec = ["b","r"];
+
+run_mod = 1;                %0 - wet mode, 1 - dry mode
+acc_prob = [0.25,0.75];     %probabilty for acc in dry mode
 
 %% Plot Parameters
 title = ["Target was Presented","Target was absent"];
@@ -34,6 +37,9 @@ P2_cor1=[0.7,0.7,0.3]; P2_cor2=[0.2,0.4,0.1];
 P3_cor1=[0.7,0.6,0.2]; P3_cor2=[0.8,0.2,0.6];
 P4_cor1=[0.5,0.5,0.2]; P4_cor2=[0.8,0.1,0.3];
 
+%% Expirament instractions
+expirament_instractions(fontsize,run_mod)
+
 %% creating all data structure
 Expirament = build_struct(num_of_blocks,cond,scenario,set_sizes,num_of_trails);
 
@@ -43,9 +49,11 @@ block_order = randperm(num_of_blocks);          %determining bolck order randoml
 for i = block_order                             %running through blocks by block_order
     cur_block_name = (char("B"+i));             
     Expirament.(cur_block_name) = run_block(Expirament.(cur_block_name),...
-        stimuli_shape,color_vec,num_of_trails,fontsize);
+        stimuli_shape,color_vec,num_of_trails,fontsize,run_mod,acc_prob);
 end
-% save('raw data' , 'Expirament'); 
+
+save('raw data' , 'Expirament'); 
+
 %% pre processing
 %checking for wrong/bad results, in case not enough good data will not 
 %move on to analysis
@@ -60,13 +68,13 @@ for i = 1:num_of_blocks
     count_valid = count_valid + num_of_valid_ans;                     
     Expirament.All_results.passed_trails.(char_size)(char_cond) = num_of_valid_ans;
 
-%      if has_passed == 0
-%          error('not enough correct answer per block');
-%      end
+     if has_passed == 0             %check if block is valied
+         error('not enough correct answer in one of the blocks');
+     end
 end
-% if count_valid < min_correct_ans
-%     error('not enough correct answer for expirament');
-% end
+if count_valid < min_correct_ans    %check if expirament is valied
+    error('not enough correct answer in the expirament');
+end
 
         
 %% Analisys
