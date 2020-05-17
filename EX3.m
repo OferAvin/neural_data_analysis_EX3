@@ -10,7 +10,7 @@ axis off
 expirament_instractions(fontsize);
 %% Experiment parameters
 num_of_blocks = 8;
-num_of_trails = 1;
+num_of_trails = 2;
 max_rt_in_sec = 4;
 min_rt_in_sec = 0.1;
 min_correct_ans_per_block = 10;
@@ -52,9 +52,14 @@ end
 count_valid = 0;
 for i = 1:num_of_blocks
     cur_block_name = (char("B"+i));
-    [Expirament.(cur_block_name),has_passed,num_of_valid_ans] = ...
+    char_size = char("size_"+ Expirament.(cur_block_name).set_size);
+    char_cond = char(Expirament.(cur_block_name).condition);
+    
+    [Expirament.(cur_block_name),has_passed,num_of_valid_ans] = ... 
         is_valid_block(Expirament.(cur_block_name),min_correct_ans_per_block,max_rt_in_sec,min_rt_in_sec);
-    count_valid = count_valid + num_of_valid_ans;
+    count_valid = count_valid + num_of_valid_ans;                     
+    Expirament.All_results.passed_trails.(char_size)(char_cond) = num_of_valid_ans;
+
 %      if has_passed == 0
 %          error('not enough correct answer per block');
 %      end

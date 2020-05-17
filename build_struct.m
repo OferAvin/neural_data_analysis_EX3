@@ -11,9 +11,10 @@ function S = build_struct(size,cond,scenario,set_sizes,trial_num)
     generic_res_table1 = build_double_table(mean_sd,scenario); 
     generic_res_table2 = build_cell_table(cond,scenario,num_of_sizes);
     generic_res_table3 = build_double_table(cond,scenario);
+    passed_trails_table = build_double_table(cond,"size_"+string(set_sizes));
     
-    GenericBlock = struct('condition', "", 'set_size', 0,...
-        'has_target', bool, 'acc', bool,'rt', trailZzer, 'passed',bool,'block_results',generic_res_table1);
+    GenericBlock = struct('condition',"",'set_size',0,'has_target',bool,...
+        'acc',bool,'rt',trailZzer,'passed',bool,'block_results',generic_res_table1);
 
     %creating structure for eache block
     cur_cond = 0;
@@ -28,6 +29,7 @@ function S = build_struct(size,cond,scenario,set_sizes,trial_num)
     end
     
     %creating all results structure
-    S.All_results = struct('mean', generic_res_table2 ,'sd',generic_res_table2,...
+    S.All_results = struct('passed_trails',passed_trails_table,...
+        'mean',generic_res_table2,'sd',generic_res_table2,...
         'p_val',generic_res_table3,'rho',generic_res_table3,'fit',generic_res_table2);
 end
