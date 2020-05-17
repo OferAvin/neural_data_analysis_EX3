@@ -10,7 +10,7 @@ axis off
 expirament_instractions(fontsize);
 %% Experiment parameters
 num_of_blocks = 8;
-num_of_trails = 2;
+num_of_trails = 30;
 max_rt_in_sec = 4;
 min_rt_in_sec = 0.1;
 min_correct_ans_per_block = 10;
@@ -74,7 +74,8 @@ end
 for i = 1:num_of_blocks
     cur_block_name = (char("B"+i));
     Cur_block = Expirament.(cur_block_name);
-    
+   
+    % get valid trails by scenario
     inter1 = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.(scenario(1)), 1);     
     inter2 = get_sub_vec_intersect(Cur_block.passed, 1,Cur_block.(scenario(1)), 0);
     

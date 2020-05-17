@@ -1,7 +1,7 @@
 %this function creates the structure where all data is saved
 %in this structure there is a structure for every block including
-%parameters, data and results. there is another structure all results from
-%all blocks
+%parameters, data and results. there is another structure holds 
+%all results from all blocks
 function S = build_struct(size,cond,scenario,set_sizes,trial_num)
     mean_sd = ["mean","SD"];
     num_of_sizes = length(set_sizes);
